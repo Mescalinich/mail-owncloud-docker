@@ -25,7 +25,7 @@ docker run -d \
   -v <path to data on host>:/data \
   -p 143:143 -p 993:993 -p 4190:4190 -p 25:25 -p 465:465 -p 80:80 -p 443:443 \
   --name mycloud -h <FQDN of host> \
-  idef1x/mail-owncloud-docker
+  Mescalinich/mail-owncloud-docker
 ```
 # Optional environment vars to use:
 ```
