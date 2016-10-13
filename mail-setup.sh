@@ -36,7 +36,8 @@ fi
     # Configure postfix
     hostname > /etc/mailname 
     postconf -e "myhostname = `cat /etc/hostname`" 
-    postconf -e "mydestination = `cat /etc/hostname`" 
+    #postconf -e "mydestination = `cat /etc/hostname`"
+    postconf -e "mydestination = "
     postconf -e "inet_interfaces = all" 
 
     # Create selfsigned certificates for Dovecot, cause it doesn't do that automatically in xenial
