@@ -24,8 +24,8 @@ docker run -d \
   -v /etc/timezone:/etc/timezone:ro \
   -v <path to data on host>:/data \
   -p 143:143 -p 993:993 -p 4190:4190 -p 25:25 -p 465:465 -p 80:80 -p 443:443 \
-  --name mycloud -h <FQDN of host> \
-  Mescalinich/mail-owncloud-docker
+  --name mymail -h <FQDN of host> \
+  mescalinich/mail-owncloud-docker
 ```
 # Optional environment vars to use:
 ```
@@ -42,6 +42,8 @@ docker run -d \
 - setup an setup password and copy paste the red $CONF string into /var/www/postfixadmin/config.local.php (before the last ?>):
   - open een shell in the container: docker exec -it <container ID> bash
   - edit file: export TERM=linux && nano /var/www/postfixadmin/config.local.php 
+  - add $CONF with password hash
+  - add $CONF['emailcheck_resolve_domain']='NO'; if you have no domain yet or want to use local or test domains like (.local, .devel)
   - save and exit shell
 - Then goto http(s)://hostname/postfixadmin to configure domains and mailboxes etc
 ```
