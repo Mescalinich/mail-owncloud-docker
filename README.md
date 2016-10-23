@@ -17,15 +17,28 @@ NB: All latest versions on new build
 
 NB: when you want persistence storage, please mount it under /data (see example below for host path), and all data will be moved there.
 
-Expose everything public:
+# Setup and run
+
+1. Install docker on the hostmashine 
+https://docs.docker.com/engine/installation/
+2. Clone this repository to some hostmashine folder 
+```
+git clone git@github.com:Mescalinich/mail-owncloud-docker.git .
+```
+3. Build image from dockerfile 
+```
+docker build -t mail-owncloud-docker/latest .
+```
+4. Run container and expose everything public:
+
 ```
 docker run -d \
   -v /etc/localtime:/etc/localtime:ro \
   -v /etc/timezone:/etc/timezone:ro \
   -v <path to data on host>:/data \
   -p 143:143 -p 993:993 -p 4190:4190 -p 25:25 -p 465:465 -p 80:80 -p 443:443 \
-  --name mymail -h <FQDN of host> \
-  mescalinich/mail-owncloud-docker
+  --name mail -h <FQDN of host> \
+  mail-owncloud-docker/latest
 ```
 # Optional environment vars to use:
 ```
