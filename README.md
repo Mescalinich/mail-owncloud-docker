@@ -21,14 +21,23 @@ NB: when you want persistence storage, please mount it under /data (see example 
 
 1. Install docker on the hostmashine 
 https://docs.docker.com/engine/installation/
+
+or use one-line docker install script (will download and start as superuser)
+
+   wget -qO- https://get.docker.com/ | sh
+
 2. Clone this repository to some hostmashine folder 
+
 ```
 git clone git@github.com:Mescalinich/mail-owncloud-docker.git .
 ```
-3. Build image from dockerfile 
+
+3. Build image from dockerfile
+
 ```
 docker build -t mail-owncloud-docker/latest .
 ```
+
 4. Run container and expose everything public:
 
 ```
@@ -40,7 +49,9 @@ docker run -d \
   --name mail -h <FQDN of host> \
   mail-owncloud-docker/latest
 ```
+
 # Optional environment vars to use:
+
 ```
 - SQLUSR  => mysql admin user (default sqladmin)
 - SQLPWD  => mysql user password (default random generated -> see logs for the password (docker logs <container ID>|grep password)
@@ -49,7 +60,9 @@ docker run -d \
              NB: only supply de datbase for mail, since owncloud will ask for it during setup.
 - WEB     => if set then no SSL wil be activated (in case you use a SSL proxy or other reason why you don't want SSL)
 ```
+
 # Postfixadmin
+
 ```
 - First setup goto http(s)://hostname/postfixadmin/setup.php to initialize database
 - setup an setup password and copy paste the red $CONF string into /var/www/postfixadmin/config.local.php (before the last ?>):
@@ -60,7 +73,9 @@ docker run -d \
   - save and exit shell
 - Then goto http(s)://hostname/postfixadmin to configure domains and mailboxes etc
 ```
+
 # Owncloud
+
 ```
 - goto http(s)://hostname 
 - fill in a username/password for an admin user
@@ -72,13 +87,17 @@ docker run -d \
 - NB: sometimes owncloud wines about not able to connect to sql server (if localhost/127.0.0.1). Most times a second try will work.
       Putting 127.0.0.1 in the host field (instead of localhost) seems to work better than localhost. For now I don't know what's picky. 
 ```
+
 # Webmail
+
 ```
 - you can use the mail client provided by (installable via) owncloud 
   - fill in details and select SSL/TLS as IMAP/SMTP security 
   - Use 127.0.0.1 as IMAP and SMTP host 
 ```
+
 # To use own certificates:
+
 ```
 - For Apache certificates add parameters:
   for cert: -v <path to SSL cert>:/etc/ssl/certs/ssl-cert-snakeoil.pem
@@ -90,5 +109,6 @@ docker run -d \
 ```
 
 # Logging
+
 - all logging is sent to a syslog server on the dockerhost
 
