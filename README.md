@@ -23,21 +23,24 @@ NB: when you want persistence storage, please mount it under /data (see example 
 https://docs.docker.com/engine/installation/
 
 or use one-line docker install script (will download and start as superuser)
+```
+wget -qO- https://get.docker.com/ | sh
+```
 
-   wget -qO- https://get.docker.com/ | sh
-
+add your current user to `docker` group
+```
+sudo usermod -aG docker $(whoami)
+```
 2. Clone this repository to some hostmashine folder 
 
 ```
 git clone git@github.com:Mescalinich/mail-owncloud-docker.git .
 ```
-
 3. Build image from dockerfile
 
 ```
 docker build -t mail-owncloud-docker/latest .
 ```
-
 4. Run container and expose everything public:
 
 ```
